@@ -50,3 +50,10 @@ export const agendaItemIcons = {
   afterparty: 'cal-sm',
   other: 'cal-sm',
 };
+
+export const getDateOnlyString = (date) => {
+  const YYYY = date.getUTCFullYear();
+  const MM = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  const DD = date.getUTCDate().toString().padStart(2, '0');
+  return `${YYYY}-${MM}-${DD}`;
+};
