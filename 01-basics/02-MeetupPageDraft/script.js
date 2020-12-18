@@ -58,7 +58,6 @@ export const app = new Vue({
     return {
       originalMeetup: null,
       loading: false,
-      img: null,
     };
   },
 
@@ -67,13 +66,13 @@ export const app = new Vue({
     this.loading = true;
     this.originalMeetup = await this.fetchData();
     this.loading = false;
-    this.img = getMeetupCoverLink(this.meetup);
   },
 
   computed: {
     meetup() {
       const meetup = { ...this.originalMeetup };
-      meetup.cover = this.img ? { '--bg-url': `url(${this.img})` } : {};
+      const img = getMeetupCoverLink(meetup);
+      meetup.cover = img ? { '--bg-url': `url(${img})` } : {};
 
       meetup.localDate = new Date(meetup.date).toLocaleString(
         navigator.language, {
@@ -88,20 +87,23 @@ export const app = new Vue({
         meetup.title = agendaItemTitles[meetup.type];
       }
 
-
-
       return meetup;
-    }
+    },
+
+    meetupAgenda() {
+      return this.originalMeetup
+        ? this.originalMeetup.agenda.map((item) => ({
+            ...item,
+            icon: `/assets/icons/icon-${ agendaItemIcons[item.type] || 'cal-sm' }.svg`
+            })
+          )
+        : [];
+    },
   },
 
   methods: {
     fetchData() {
       return fetch(`${API_URL}/meetups/${MEETUP_ID}`).then((res) => res.json());
     },
-
-    getIcon(item) {
-      const icon = agendaItemIcons[item.type] || 'cal-sm';
-      return `/assets/icons/icon-${icon}.svg`;
-    }
   },
 });

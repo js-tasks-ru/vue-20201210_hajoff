@@ -8,7 +8,7 @@ export const app = new Vue({
 		};
 	},
   methods: {
-    increment: function () {
+    increment () {
       this.number += 1;
     },
   },

@@ -24,10 +24,10 @@
 
           <h3>Программа</h3>
           <div class="meetup-agenda">
-            <p class="meetup-agenda__empty" v-if="!meetup.agenda || !meetup.agenda.length">Программа пока пуста, но когда-нибудь в ней обязательно что-нибудь появится!</p>
-            <div v-else v-for="item in meetup.agenda" :key="item.id" class="meetup-agenda__item">
+            <p class="meetup-agenda__empty" v-if="!meetupAgenda || !meetupAgenda.length">Программа пока пуста, но когда-нибудь в ней обязательно что-нибудь появится!</p>
+            <div v-else v-for="item in meetupAgenda" :key="item.id" class="meetup-agenda__item">
               <div class="meetup-agenda__item-col">
-                <img class="icon" alt="icon" :src='getIcon(item)'/>
+                <img class="icon" alt="icon" :src='item.icon'/>
               </div>
               <div class="meetup-agenda__item-col">{{ item.startsAt }} - {{ item.endsAt }}</div>
               <div class="meetup-agenda__item-col">
