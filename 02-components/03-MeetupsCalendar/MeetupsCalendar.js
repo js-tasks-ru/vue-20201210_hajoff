@@ -97,7 +97,7 @@ export const MeetupsCalendar = {
 
   methods: {
     setMonth(count) {
-      this.date = new Date(this.date.setMonth(this.date.getMonth() + count));
+      this.date = new Date(this.date.setDate(1).setMonth(this.date.getMonth() + count));
     },
   },
 };
